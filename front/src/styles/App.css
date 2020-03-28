@@ -1,0 +1,25 @@
+.App {
+  text-align: center;
+  display: flex;
+  height: 100%;
+}
+
+.main_wrapper {
+  width: 65%;
+  height: 100%;
+  overflow: hidden;
+}
+
+@media screen and (max-width: 768px) {
+  .main_wrapper {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .App {
+    display: block;
+  }
+}
