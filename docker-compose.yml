@@ -8,6 +8,8 @@ services:
       - "27017:27017"
     volumes:
       - mongo:/data/db
+    networks:
+    - default-network
 
   back:
     build:
@@ -17,6 +19,8 @@ services:
     environment:
       - PORT={PORT}
       - NODE_ENV=development
+      - DB_HOST=mongo
+      - DB=test
     depends_on:
       - mongodb
     ports:
