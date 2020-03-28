@@ -1,4 +1,4 @@
-version: '3.7'
+version: "3.7"
 
 services:
   mongodb:
@@ -8,6 +8,8 @@ services:
       - "27017:27017"
     volumes:
       - mongo:/data/db
+    networks:
+      - default-network
 
   back:
     build:
@@ -17,12 +19,14 @@ services:
     environment:
       - PORT={PORT}
       - NODE_ENV=development
+      - DB_HOST=mongo
+      - DB=test
     depends_on:
       - mongodb
     ports:
-      - '8000:8000'
+      - "8000:8000"
     expose:
-      - '8000'
+      - "8000"
     networks:
       - default-network
     volumes:
@@ -38,15 +42,15 @@ services:
       - PORT={PORT}
       - NODE_ENV=development
     ports:
-      - '3000:3000'
+      - "3000:3000"
     expose:
-      - '3000'
+      - "3000"
     networks:
       - default-network
     volumes:
       - ./front/:/home/service/front/
       - front_node_modules:/home/service/front/node_modules/
-    
+
 volumes:
   mongo:
   back_node_modules:
