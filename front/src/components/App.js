@@ -1,4 +1,6 @@
 import React from "react";
+import WriteArticle from './WriteArticle';
+import Article from './Article';
 import "../styles/App.css";
 import axios from "axios";
 
@@ -35,23 +37,41 @@ class App extends React.Component {
     this.fetchData();
   }
 
-  articleList() {
+  async create(article) {
+    await axios.post('/api/board', {
+      title: article.title,
+      content: article.content
+    });
+    this.fetchData();
+  }
+
+  get articleList() {
     const { articles } = this.state;
 
     return articles.map((article, index) => {
       return (
-        <div key={index}>
-          <div>{article.title}</div>
-          <div>{article.content}</div>
-          <button onClick={() => this.delete(article._id)}>Delete</button>
-          <button onClick={() => this.update(article._id)}>Update</button>
-        </div>
+        <Article
+          key={index}
+          title={article.title}
+          content={article.content}
+          _id={article._id}
+          onDelete={this.delete.bind(this)}
+        />
       );
     });
   }
 
   render() {
-    return <div className="App">{this.articleList()}</div>;
+    return (
+      <div className="App">
+        <div className="list">
+          <WriteArticle
+            createArticle={this.create.bind(this)}
+          />
+          {this.articleList}
+        </div>
+      </div>
+    );
   }
 }
 

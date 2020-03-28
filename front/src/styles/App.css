@@ -4,6 +4,14 @@
   height: 100%;
 }
 
+.App .list {
+  width: 100%;
+  max-width: 1024px;
+  height: 100%;
+  overflow-y: auto;
+  margin: auto;
+}
+
 .main_wrapper {
   width: 65%;
   height: 100%;
